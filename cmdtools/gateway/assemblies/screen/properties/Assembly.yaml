@@ -1,0 +1,59 @@
+assemblyInfo:
+  assemblyTitle: operation.screen
+  #assemblyResource配置web资源结构，在程序集的jar中site是是站点的根，在配置源码工程结构时site必须在资源目录下，资源目录可起任何名字，它在打包时并不会生成了jar中，因此上site指定的名字才是真正的资源根。
+  assemblyResource: site=/site;http.root=$(site)/web;http.jss=$(site)/jss/http;ws.jss=$(site)/jss/ws
+  assemblyDescription: 运营弹屏
+  assemblyConfiguration:
+  assemblyCompany: cj工作室
+  assemblyProduct: cj.netos.screen
+  assemblyCopyright: Copyright   2011
+  assemblyTrademark:
+  assemblyCulture:
+  guid: 1A7A5954-76A5-4724-9236-P386F4C7352E
+  assemblyVersion: 1.0.0.0
+  assemblyFileVersion: 1.0.0.0
+  assemblyIcon:
+  assemblyDeveloperHome:
+entryPoint:
+  plugins:
+    - name: mybatis
+      class: cj.studio.orm.mybatis.MyBatisPlugin
+      parameters:
+        classes: '[]'
+        packages: '[]'
+  activators:
+    - name: 开放口服务活动器
+      class: cj.studio.openport.OpenportEntryPointActivator
+      parameters:
+        publicAPIPath: /portsapi
+        checkAppSignStrategy: cj.netos.screen.program.AppSignStrategy
+        checkAccessTokenStrategy: cj.netos.screen.program.CheckAccessTokenStrategy
+
+
+global:
+  default: zh_CN
+  desc: 如果系统环境要求各芯片采用的语言本芯片没有，则芯片可采用默认语言
+serviceContainer:
+  name: netContainer
+  #switchfilter用于在jss中拦截java服务，由于要匹配服务请求id，因此损耗性能，switchfilter=on为启用，switchfilter=off为关闭
+  switchFilter: off
+  #如果monitors只有单个，可以使用monitor属性
+  #cj.netos.rabbitmq.DefaultRabbitMQMonitor,
+  monitors:
+  jss:
+  scans:
+    - package: cj.studio.orm.mybatis
+      extName: .class|.json|.xml
+      exoterical: true
+    - package: cj.netos.screen.program
+      extName: .class|.json|.xml
+      exoterical: true
+    - package: cj.netos.screen.service
+      extName: .class|.json|.xml
+      exoterical: true
+    - package: cj.netos.screen.ports
+      extName: .class|.json|.xml
+      exoterical: true
+    - package: cj.netos.screen.webview
+      extName: .class|.json|.xml
+      exoterical: true
