@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface ScreenSubjectMapper {
+
     /**
      * @mbg.generated generated automatically, do not modify!
      */
@@ -63,6 +64,5 @@ public interface ScreenSubjectMapper {
 
     long getMaxSort();
 
-    List<ScreenSubject> page(@Param(value = "limit") int limit,@Param(value = "offset") long offset);
-
+    List<ScreenSubject> page(@Param(value = "limit") int limit, @Param(value = "offset") long offset);
 }

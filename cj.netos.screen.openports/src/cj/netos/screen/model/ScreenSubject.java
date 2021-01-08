@@ -34,6 +34,12 @@ public class ScreenSubject {
     private String creator;
 
     /**
+     * Column: leading
+     * Remark: 图标
+     */
+    private String leading;
+
+    /**
      * Column: sort
      * Remark: 排序，0-5保留为主屏低下展示，6-n是更多
      */
@@ -83,6 +89,14 @@ public class ScreenSubject {
 
     public void setCreator(String creator) {
         this.creator = creator == null ? null : creator.trim();
+    }
+
+    public String getLeading() {
+        return leading;
+    }
+
+    public void setLeading(String leading) {
+        this.leading = leading == null ? null : leading.trim();
     }
 
     public Long getSort() {

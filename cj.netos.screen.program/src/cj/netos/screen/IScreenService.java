@@ -30,4 +30,12 @@ public interface IScreenService {
 
     List<PopupRule> listPopupRule();
 
+    void clearScreen();
+
+    void moveUpSubject(String id);
+
+    void moveDownSubject(String id);
+
+    void updateSubject(String id, String title, String subTitle,String leading, String href);
+
 }

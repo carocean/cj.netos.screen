@@ -27,7 +27,7 @@ public class ScreenPorts implements IScreenPorts {
     }
 
     @Override
-    public void createSubject(ISecuritySession securitySession, String title, String subTitle, String href) throws CircuitException {
+    public void createSubject(ISecuritySession securitySession, String title, String subTitle, String leading,String href) throws CircuitException {
         _checkRights(securitySession);
         ScreenSubject screenSubject = new ScreenSubject();
         screenSubject.setCreator(securitySession.principal());
@@ -36,16 +36,34 @@ public class ScreenPorts implements IScreenPorts {
         screenSubject.setId(Encript.md5(UUID.randomUUID().toString()));
         screenSubject.setSubTitle(subTitle);
         screenSubject.setTitle(title);
+        screenSubject.setLeading(leading);
         long max = screenService.getMaxSortOfSubject();
         screenSubject.setSort(max + 1);
         screenService.createSubject(screenSubject);
     }
 
+    @Override
+    public void updateSubject(ISecuritySession securitySession, String id, String title, String subTitle,String leading, String href) throws CircuitException {
+        _checkRights(securitySession);
+        screenService.updateSubject(id,title,subTitle,leading,href);
+    }
 
     @Override
     public void removeSubject(ISecuritySession securitySession, String id) throws CircuitException {
         _checkRights(securitySession);
         screenService.removeSubject(id);
+    }
+
+    @Override
+    public void moveUpSubject(ISecuritySession securitySession, String id) throws CircuitException {
+        _checkRights(securitySession);
+        screenService.moveUpSubject(id);
+    }
+
+    @Override
+    public void moveDownSubject(ISecuritySession securitySession, String id) throws CircuitException {
+        _checkRights(securitySession);
+        screenService.moveDownSubject(id);
     }
 
     @Override
@@ -82,5 +100,11 @@ public class ScreenPorts implements IScreenPorts {
     @Override
     public List<PopupRule> listPopupRule(ISecuritySession securitySession) throws CircuitException {
         return screenService.listPopupRule();
+    }
+
+    @Override
+    public void clearScreen(ISecuritySession securitySession) throws CircuitException {
+        _checkRights(securitySession);
+         screenService.clearScreen();
     }
 }

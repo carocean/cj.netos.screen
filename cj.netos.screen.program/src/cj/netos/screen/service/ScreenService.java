@@ -42,6 +42,42 @@ public class ScreenService implements IScreenService {
 
     @CjTransaction
     @Override
+    public void moveUpSubject(String id) {
+        ScreenSubject screenSubject = screenSubjectMapper.selectByPrimaryKey(id);
+        if (screenSubject == null) {
+            return;
+        }
+        screenSubject.setSort(screenSubject.getSort() - 1);
+        screenSubjectMapper.updateByPrimaryKeySelective(screenSubject);
+    }
+
+    @CjTransaction
+    @Override
+    public void moveDownSubject(String id) {
+        ScreenSubject screenSubject = screenSubjectMapper.selectByPrimaryKey(id);
+        if (screenSubject == null) {
+            return;
+        }
+        screenSubject.setSort(screenSubject.getSort() + 1);
+        screenSubjectMapper.updateByPrimaryKeySelective(screenSubject);
+    }
+
+    @CjTransaction
+    @Override
+    public void updateSubject(String id, String title, String subTitle,String leading, String href) {
+        ScreenSubject screenSubject = screenSubjectMapper.selectByPrimaryKey(id);
+        if (screenSubject == null) {
+            return;
+        }
+        screenSubject.setTitle(title);
+        screenSubject.setSubTitle(subTitle);
+        screenSubject.setHref(href);
+        screenSubject.setLeading(leading);
+        screenSubjectMapper.updateByPrimaryKey(screenSubject);
+    }
+
+    @CjTransaction
+    @Override
     public List<ScreenSubject> pageSubject(int limit, long offset) {
         return screenSubjectMapper.page(limit, offset);
     }
@@ -56,6 +92,12 @@ public class ScreenService implements IScreenService {
             return null;
         }
         return list.get(0);
+    }
+
+    @CjTransaction
+    @Override
+    public void clearScreen() {
+        currentScreenMapper.deleteByPrimaryKey(_KEY_SCREEN_ID);
     }
 
     @CjTransaction

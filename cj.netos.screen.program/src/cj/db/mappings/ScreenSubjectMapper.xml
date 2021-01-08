@@ -8,6 +8,7 @@
     <result column="sub_title" jdbcType="VARCHAR" property="subTitle" />
     <result column="href" jdbcType="VARCHAR" property="href" />
     <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="leading" jdbcType="VARCHAR" property="leading" />
     <result column="sort" jdbcType="BIGINT" property="sort" />
     <result column="ctime" jdbcType="BIGINT" property="ctime" />
   </resultMap>
@@ -73,7 +74,7 @@
   </sql>
   <sql id="Base_Column_List">
     <!-- @mbg.generated: generated automatically, do not modify! -->
-    id, title, sub_title, href, creator, sort, ctime
+    id, title, sub_title, href, creator, `leading`, sort, ctime
   </sql>
   <select id="selectByExample" parameterType="cj.netos.screen.model.ScreenSubjectExample" resultMap="BaseResultMap">
     <!-- @mbg.generated: generated automatically, do not modify! -->
@@ -112,11 +113,11 @@
   <insert id="insert" parameterType="cj.netos.screen.model.ScreenSubject">
     <!-- @mbg.generated: generated automatically, do not modify! -->
     insert into screen_subject (id, title, sub_title, 
-      href, creator, sort, 
-      ctime)
+      href, creator, `leading`, 
+      sort, ctime)
     values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{subTitle,jdbcType=VARCHAR}, 
-      #{href,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{sort,jdbcType=BIGINT}, 
-      #{ctime,jdbcType=BIGINT})
+      #{href,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{leading,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=BIGINT}, #{ctime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="cj.netos.screen.model.ScreenSubject">
     <!-- @mbg.generated: generated automatically, do not modify! -->
@@ -136,6 +137,9 @@
       </if>
       <if test="creator != null">
         creator,
+      </if>
+      <if test="leading != null">
+        `leading`,
       </if>
       <if test="sort != null">
         sort,
@@ -159,6 +163,9 @@
       </if>
       <if test="creator != null">
         #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="leading != null">
+        #{leading,jdbcType=VARCHAR},
       </if>
       <if test="sort != null">
         #{sort,jdbcType=BIGINT},
@@ -194,6 +201,9 @@
       <if test="record.creator != null">
         creator = #{record.creator,jdbcType=VARCHAR},
       </if>
+      <if test="record.leading != null">
+        `leading` = #{record.leading,jdbcType=VARCHAR},
+      </if>
       <if test="record.sort != null">
         sort = #{record.sort,jdbcType=BIGINT},
       </if>
@@ -213,6 +223,7 @@
       sub_title = #{record.subTitle,jdbcType=VARCHAR},
       href = #{record.href,jdbcType=VARCHAR},
       creator = #{record.creator,jdbcType=VARCHAR},
+      `leading` = #{record.leading,jdbcType=VARCHAR},
       sort = #{record.sort,jdbcType=BIGINT},
       ctime = #{record.ctime,jdbcType=BIGINT}
     <if test="_parameter != null">
@@ -235,6 +246,9 @@
       <if test="creator != null">
         creator = #{creator,jdbcType=VARCHAR},
       </if>
+      <if test="leading != null">
+        `leading` = #{leading,jdbcType=VARCHAR},
+      </if>
       <if test="sort != null">
         sort = #{sort,jdbcType=BIGINT},
       </if>
@@ -251,6 +265,7 @@
       sub_title = #{subTitle,jdbcType=VARCHAR},
       href = #{href,jdbcType=VARCHAR},
       creator = #{creator,jdbcType=VARCHAR},
+      `leading` = #{leading,jdbcType=VARCHAR},
       sort = #{sort,jdbcType=BIGINT},
       ctime = #{ctime,jdbcType=BIGINT}
     where id = #{id,jdbcType=VARCHAR}

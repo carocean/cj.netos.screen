@@ -19,12 +19,32 @@ public interface IScreenPorts extends IOpenportService {
     void createSubject(ISecuritySession securitySession,
                        @CjOpenportParameter(usage = "标题", name = "title") String title,
                        @CjOpenportParameter(usage = "副标题", name = "subTitle") String subTitle,
+                       @CjOpenportParameter(usage = "图标", name = "leading") String leading,
+                       @CjOpenportParameter(usage = "超链接，一般是h5", name = "href", in = PKeyInRequest.content) String href
+    ) throws CircuitException;
+
+    @CjOpenport(usage = "更新主体", command = "post")
+    void updateSubject(ISecuritySession securitySession,
+                       @CjOpenportParameter(usage = "主体标识", name = "id") String id,
+                       @CjOpenportParameter(usage = "标题", name = "title") String title,
+                       @CjOpenportParameter(usage = "副标题", name = "subTitle") String subTitle,
+                       @CjOpenportParameter(usage = "图标", name = "leading") String leading,
                        @CjOpenportParameter(usage = "超链接，一般是h5", name = "href", in = PKeyInRequest.content) String href
     ) throws CircuitException;
 
     @CjOpenport(usage = "移除主体")
     void removeSubject(ISecuritySession securitySession,
                        @CjOpenportParameter(usage = "主体标识", name = "id") String id
+    ) throws CircuitException;
+
+    @CjOpenport(usage = "主体上移")
+    void moveUpSubject(ISecuritySession securitySession,
+                       @CjOpenportParameter(usage = "主体标识", name = "id") String id
+    ) throws CircuitException;
+
+    @CjOpenport(usage = "主体下移")
+    void moveDownSubject(ISecuritySession securitySession,
+                         @CjOpenportParameter(usage = "主体标识", name = "id") String id
     ) throws CircuitException;
 
     @CjOpenport(usage = "分页主体")
@@ -36,6 +56,11 @@ public interface IScreenPorts extends IOpenportService {
 
     @CjOpenport(usage = "当前弹屏")
     ScreenResult getCurrent(
+            ISecuritySession securitySession
+    ) throws CircuitException;
+
+    @CjOpenport(usage = "清除弹屏")
+    void clearScreen(
             ISecuritySession securitySession
     ) throws CircuitException;
 
