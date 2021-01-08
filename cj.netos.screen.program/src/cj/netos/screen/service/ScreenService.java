@@ -98,6 +98,7 @@ public class ScreenService implements IScreenService {
             currentScreenMapper.insert(screen);
             return;
         }
+        screen.setShowSubject(subject);
         screen.setUseRule(popupRule);
         currentScreenMapper.updateByPrimaryKeySelective(screen);
     }
