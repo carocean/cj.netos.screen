@@ -38,4 +38,6 @@ public interface IScreenService {
 
     void updateSubject(String id, String title, String subTitle,String leading, String href);
 
+    void updatePopupRuleArgs(String code, String args);
+
 }

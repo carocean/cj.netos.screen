@@ -32,6 +32,12 @@ public interface IScreenPorts extends IOpenportService {
                        @CjOpenportParameter(usage = "超链接，一般是h5", name = "href", in = PKeyInRequest.content) String href
     ) throws CircuitException;
 
+    @CjOpenport(usage = "更新弹窗规则参数", command = "post")
+    void updatePopupRuleArgs(ISecuritySession securitySession,
+                       @CjOpenportParameter(usage = "标识", name = "code") String code,
+                       @CjOpenportParameter(usage = "参数", name = "args",in = PKeyInRequest.content) String args
+    ) throws CircuitException;
+
     @CjOpenport(usage = "移除主体")
     void removeSubject(ISecuritySession securitySession,
                        @CjOpenportParameter(usage = "主体标识", name = "id") String id

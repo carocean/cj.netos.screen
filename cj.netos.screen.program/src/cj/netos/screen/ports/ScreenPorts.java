@@ -49,6 +49,12 @@ public class ScreenPorts implements IScreenPorts {
     }
 
     @Override
+    public void updatePopupRuleArgs(ISecuritySession securitySession, String code, String args) throws CircuitException {
+        _checkRights(securitySession);
+        screenService.updatePopupRuleArgs(code,args);
+    }
+
+    @Override
     public void removeSubject(ISecuritySession securitySession, String id) throws CircuitException {
         _checkRights(securitySession);
         screenService.removeSubject(id);

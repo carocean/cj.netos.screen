@@ -64,7 +64,7 @@ public class ScreenService implements IScreenService {
 
     @CjTransaction
     @Override
-    public void updateSubject(String id, String title, String subTitle,String leading, String href) {
+    public void updateSubject(String id, String title, String subTitle, String leading, String href) {
         ScreenSubject screenSubject = screenSubjectMapper.selectByPrimaryKey(id);
         if (screenSubject == null) {
             return;
@@ -74,6 +74,17 @@ public class ScreenService implements IScreenService {
         screenSubject.setHref(href);
         screenSubject.setLeading(leading);
         screenSubjectMapper.updateByPrimaryKey(screenSubject);
+    }
+
+    @CjTransaction
+    @Override
+    public void updatePopupRuleArgs(String code, String args) {
+        PopupRule rule = popupRuleMapper.selectByPrimaryKey(code);
+        if (rule == null) {
+            return;
+        }
+        rule.setArgs(args);
+        popupRuleMapper.updateByPrimaryKey(rule);
     }
 
     @CjTransaction
